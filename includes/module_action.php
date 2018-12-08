@@ -45,17 +45,17 @@ if($service == "nmcli") {
         // COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "$bin_echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
 		
 		//KILL WPS_SUPPLICANT		
 		$exec = "ps aux|grep -iEe 'FruityWiFI_SUPPLICANT.conf' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		unset($output);
 		
@@ -63,45 +63,45 @@ if($service == "nmcli") {
 		$exec = "ps aux|grep -iEe 'dhclient $mod_supplicant_iface' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		//SETUP & START
 		$exec = "$bin_wpa_passphrase '$mod_supplicant_ssid' '$mod_supplicant_psk' > FruityWiFI_SUPPLICANT.conf";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		if ($mod_supplicant_security == "open") {
 			$exec = "$bin_sed -i 's/psk=.*/key_mgmt=NONE/g' FruityWiFI_SUPPLICANT.conf";
-			$output = exec_fruitywifi($exec);
+			$output = exec_blackbulb($exec);
 		}
 		
 		$exec = "$bin_ifconfig $mod_supplicant_iface up";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		$exec = "$bin_iwlist $mod_supplicant_iface scan";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		$exec = "$bin_wpa_supplicant -i $mod_supplicant_iface -f $mod_logs -t -D wext -c FruityWiFI_SUPPLICANT.conf > /dev/null 2 &";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		$exec = "nohup bash -c '$bin_dhclient $mod_supplicant_iface -d' > /dev/null 2 &"; //ALTERNATIVE
 		//$exec = "sudo tmux new -s DHCLIENT -d '$bin_dhclient $mod_supplicant_iface -d'"; //ALTERNATIVE
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
 		
 		//$exec = "$bin_sed -i '1i nameserver 8.8.8.8' /etc/resolv.conf";
-		//exec_fruitywifi($exec);
+		//exec_blackbulb($exec);
 		
 		$wait = 3;
 		
 		/*
         $exec = "$bin_ifconfig $iface_supplicant up";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         $exec = "$bin_nmcli -n d disconnect iface $iface_supplicant";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         $exec = "$bin_nmcli -n c delete id nmcli_raspberry_wifi";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         		
         $exec = "$bin_iwlist $iface_supplicant scan";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $exec = "$bin_nmcli -n dev wifi connect '$supplicant_ssid' password '$supplicant_psk' iface $iface_supplicant name nmcli_raspberry_wifi";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         */
 		
     } else if($action == "stop") {
@@ -111,7 +111,7 @@ if($service == "nmcli") {
 		$exec = "ps aux|grep -iEe 'FruityWiFI_SUPPLICANT.conf' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		unset($output);
 		
@@ -119,28 +119,28 @@ if($service == "nmcli") {
 		$exec = "ps aux|grep -iEe 'dhclient $mod_supplicant_iface' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		$exec = "$bin_ifconfig $mod_supplicant_iface 0.0.0.0";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		$exec = "$bin_ifconfig $mod_supplicant_iface down";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		/*
         $exec = "$bin_nmcli -n d disconnect iface $iface_supplicant";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         $exec = "$bin_nmcli -n c delete id nmcli_raspberry_wifi";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         */
 		
         // COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "$bin_echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
     }
 }
@@ -148,10 +148,10 @@ if($service == "nmcli") {
 if ($install == "install_$mod_name") {
 
     $exec = "$bin_chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
     
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     header('Location: ../../install.php?module='.$mod_name);
     exit;

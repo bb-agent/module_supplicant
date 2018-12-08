@@ -1,7 +1,7 @@
 <?
 $mod_name="supplicant";
 $mod_version="1.3";
-$mod_path="/usr/share/fruitywifi/www/modules/$mod_name";
+$mod_path="/usr/share/blackbulb/www/modules/$mod_name";
 $mod_logs="$log_path/$mod_name.log"; 
 $mod_logs_history="$mod_path/includes/logs/";
 $mod_panel="show";
@@ -34,7 +34,7 @@ $bin_rm = "/bin/rm";
 $bin_route = "/sbin/route";
 $bin_perl = "/usr/bin/perl";
 $bin_sleep = "/bin/sleep";
-//$bin_nmcli = "/usr/share/fruitywifi/www/modules/nmcli/includes/NetworkManager/cli/src/nmcli";
+//$bin_nmcli = "/usr/share/blackbulb/www/modules/nmcli/includes/NetworkManager/cli/src/nmcli";
 
 # ISUP
 $mod_isup="ps aux|grep -iEe 'wpa_supplicant.+FruityWiFI_SUPPLICANT.conf' | grep -v grep";

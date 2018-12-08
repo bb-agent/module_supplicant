@@ -52,13 +52,13 @@ $mb_password = $_POST['mb_password'];
 if ($type == "save_supplicant") {
 	
     $exec = "/bin/sed -i 's/^\\\$mod_supplicant_ssid=.*/\\\$mod_supplicant_ssid=\\\"$supplicant_ssid\\\";/g' ../_info_.php";
-    $output = exec_fruitywifi($exec);
+    $output = exec_blackbulb($exec);
     
     $exec = "/bin/sed -i 's/^\\\$mod_supplicant_psk=.*/\\\$mod_supplicant_psk=\\\"$supplicant_psk\\\";/g' ../_info_.php";
-    $output = exec_fruitywifi($exec);
+    $output = exec_blackbulb($exec);
     
     $exec = "/bin/sed -i 's/^\\\$mod_supplicant_iface=.*/\\\$mod_supplicant_iface=\\\"$supplicant_iface\\\";/g' ../_info_.php";
-    $output = exec_fruitywifi($exec);
+    $output = exec_blackbulb($exec);
 
 }
 
