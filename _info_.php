@@ -37,5 +37,5 @@ $bin_sleep = "/bin/sleep";
 //$bin_nmcli = "/usr/share/blackbulb/www/modules/nmcli/includes/NetworkManager/cli/src/nmcli";
 
 # ISUP
-$mod_isup="ps aux|grep -iEe 'wpa_supplicant.+FruityWiFI_SUPPLICANT.conf' | grep -v grep";
+$mod_isup="ps aux|grep -iEe 'wpa_supplicant.+BlackBlulb_SUPPLICANT.conf' | grep -v grep";
 ?>
